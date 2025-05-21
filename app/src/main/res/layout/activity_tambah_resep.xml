@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TambahResepActivity">
+
+
+    <!-- ScrollView untuk seluruh konten form -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/footerButtons"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Gambar Placeholder -->
+            <ImageView
+                android:id="@+id/imgPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:background="#EEEEEE" />
+
+            <!-- Tombol Gambar -->
+            <Button
+                android:id="@+id/btnUploadImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+ Gambar"
+                android:textColor="#000000"
+                android:backgroundTint="#FFEB3B"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp" />
+
+            <!-- CardView Form -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Resep Baru"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:layout_marginBottom="16dp"/>
+
+                    <EditText
+                        android:id="@+id/etNamaResep"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nama Resep"
+                        android:background="@android:drawable/editbox_background"/>
+
+                    <EditText
+                        android:id="@+id/etWaktu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="waktu pembuatan"
+                        android:layout_marginTop="8dp"
+                        android:background="@android:drawable/editbox_background"/>
+
+                    <Spinner
+                        android:id="@+id/spnJenis"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:entries="@array/jenis_makanan"
+                        android:prompt="@string/jenis_makanan_prompt" />
+
+                    <EditText
+                        android:id="@+id/etBahan"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:hint="Bahan"
+                        android:layout_marginTop="8dp"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"
+                        android:background="@android:drawable/editbox_background"/>
+
+                    <EditText
+                        android:id="@+id/etLangkah"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:hint="Langkah Pembuatan"
+                        android:layout_marginTop="8dp"
+                        android:gravity="top"
+                        android:inputType="textMultiLine"
+                        android:background="@android:drawable/editbox_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Tombol Footer di bawah layar -->
+    <LinearLayout
+        android:id="@+id/footerButtons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="#000000"
+            android:backgroundTint="#FFF176" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"
+            android:textColor="#000000"
+            android:backgroundTint="#FFEB3B"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
