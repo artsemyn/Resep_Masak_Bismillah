@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "239341143445",
+    "project_id": "resep-masak-bismillah",
+    "storage_bucket": "resep-masak-bismillah.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239341143445:android:0927183637d6cb261c229c",
+        "android_client_info": {
+          "package_name": "com.example.resepmasakbismillah"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3yVQ0E7AnGvLBtTXKjY5KG7mzCFHqywA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
