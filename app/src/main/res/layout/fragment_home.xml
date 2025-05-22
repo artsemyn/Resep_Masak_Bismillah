@@ -239,5 +239,4 @@
             android:orientation="horizontal"
             android:scrollbars="none" />
     </LinearLayout>
-
 </ScrollView>
