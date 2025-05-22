@@ -63,11 +63,21 @@ public class AkunFragment extends Fragment {
         mAuth.addAuthStateListener(auth -> {
             FirebaseUser user = auth.getCurrentUser();
             if (user != null) {
-                binding.tvUsername.setText(user.getDisplayName());
-                binding.tvEmail.setText(user.getEmail());
+                // Get display name or fall back to email if no display name is set
+                String displayName = user.getDisplayName();
+                if (displayName == null || displayName.isEmpty()) {
+                    String email = user.getEmail();
+                    if (email != null) {
+                        displayName = email.substring(0, email.indexOf('@'));
+                    } else {
+                        displayName = "User";
+                    }
+                }
+                binding.tvUsername.setText(displayName);
+                binding.tvEmail.setText(user.getEmail() != null ? user.getEmail() : "No email");
             } else {
-                binding.tvUsername.setText("Guest");
-                binding.tvEmail.setText("Not logged in");
+                binding.tvUsername.setText("Not logged in");
+                binding.tvEmail.setText("Please log in");
             }
         });
 
