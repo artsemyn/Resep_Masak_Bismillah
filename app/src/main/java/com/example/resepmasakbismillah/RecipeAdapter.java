@@ -1,12 +1,16 @@
 package com.example.resepmasakbismillah;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.resepmasakbismillah.databinding.ItemRecipeBinding;
+
 import java.util.List;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
@@ -14,7 +18,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     private OnRecipeClickListener listener;
 
     public interface OnRecipeClickListener {
-        void onRecipeClick(Recipe recipe);
+        void onRecipeClick(Recipe recipe, Context context);
     }
 
     public RecipeAdapter(List<Recipe> recipes, OnRecipeClickListener listener) {
@@ -25,9 +29,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @NonNull
     @Override
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_recipe_home, parent, false);
-        return new RecipeViewHolder(view);
+        ItemRecipeBinding binding = ItemRecipeBinding.inflate(
+                LayoutInflater.from(parent.getContext()),
+                parent,
+                false
+        );
+        return new RecipeViewHolder(binding);
     }
 
     @Override
@@ -41,47 +48,30 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         return recipes.size();
     }
 
-    static class RecipeViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
-        TextView titleView;
-        TextView cookingTimeView;
-        TextView categoryView;
-        TextView ingredientsView;
-        TextView stepsView;
+    public void updateRecipes(List<Recipe> newRecipes) {
+        recipes = newRecipes;
+        notifyDataSetChanged();
+    }
 
-        RecipeViewHolder(View itemView) {
-            super(itemView);
-            imageView = itemView.findViewById(R.id.ivRecipe);
-            titleView = itemView.findViewById(R.id.tvRecipeTitle);
-            cookingTimeView = itemView.findViewById(R.id.tvCookingTime);
-            categoryView = itemView.findViewById(R.id.tvCategory);
-            ingredientsView = itemView.findViewById(R.id.tvIngredients);
-            stepsView = itemView.findViewById(R.id.tvSteps);
+    class RecipeViewHolder extends RecyclerView.ViewHolder {
+        private final ItemRecipeBinding binding;
+
+        RecipeViewHolder(ItemRecipeBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
 
         void bind(Recipe recipe) {
-            imageView.setImageResource(recipe.getImageResource());
-            titleView.setText(recipe.getTitle());
-            cookingTimeView.setText(recipe.getCookingTime());
-            categoryView.setText(recipe.getCategory());
+            // Set recipe title
+            binding.tvRecipeTitle.setText(recipe.getNama());
 
-            // Format ingredients
-            StringBuilder ingredientsText = new StringBuilder();
-            for (String ingredient : recipe.getIngredients()) {
-                ingredientsText.append("• ").append(ingredient).append("\n");
-            }
-            ingredientsView.setText(ingredientsText.toString());
+            // Set cooking time
+            binding.tvCookingTime.setText(String.format("%s menit", recipe.getWaktu()));
 
-            // Format steps
-            StringBuilder stepsText = new StringBuilder();
-            for (int i = 0; i < recipe.getSteps().size(); i++) {
-                stepsText.append(i + 1).append(". ").append(recipe.getSteps().get(i)).append("\n");
-            }
-            stepsView.setText(stepsText.toString());
-
-            itemView.setOnClickListener(v -> {
-                if (getAdapterPosition() != RecyclerView.NO_POSITION) {
-                    ((RecipeAdapter) itemView.getTag()).listener.onRecipeClick(recipe);
+            // Set click listener
+            binding.getRoot().setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onRecipeClick(recipe, binding.getRoot().getContext());
                 }
             });
         }

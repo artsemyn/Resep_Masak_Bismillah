@@ -1,90 +1,66 @@
 package com.example.resepmasakbismillah;
 
-import java.util.List;
+import com.google.firebase.firestore.DocumentId;
 
 public class Recipe {
-    private String title; // Nama resep
-    private int imageResource; // Gambar makanan
-    private String cookingTime; // Waktu memasak
-    private String category; // Jenis makanan
-    private List<String> ingredients; // Bahan
-    private List<String> steps; // Langkah-langkah
-    private String author; // Penulis resep
-    private String dateAdded; // Tanggal ditambahkan
+    @DocumentId
+    private String id;
+    private String nama;  // Changed from title
+    private String jenis; // Changed from category
+    private String deskripsi; // Changed from description
+    private String waktu; // Changed from cookingTime
+    private int kesulitan; // Changed from difficulty
+    private String bahan; // Changed from ingredients
+    private String cara; // Changed from instructions
+    private String userId;
+    private long timestamp;
 
-    public Recipe(String title, int imageResource, String cookingTime,
-                  String category, List<String> ingredients, List<String> steps) {
-        this.title = title;
-        this.imageResource = imageResource;
-        this.cookingTime = cookingTime;
-        this.category = category;
-        this.ingredients = ingredients;
-        this.steps = steps;
+    // Empty constructor required for Firestore
+    public Recipe() {
     }
 
-    // Getters
-    public String getTitle() {
-        return title;
+    public Recipe(String nama, String jenis, String deskripsi,
+                  String waktu, int kesulitan, String bahan,
+                  String cara, String userId, long timestamp) {
+        this.nama = nama;
+        this.jenis = jenis;
+        this.deskripsi = deskripsi;
+        this.waktu = waktu;
+        this.kesulitan = kesulitan;
+        this.bahan = bahan;
+        this.cara = cara;
+        this.userId = userId;
+        this.timestamp = timestamp;
     }
 
-    public int getImageResource() {
-        return imageResource;
-    }
+    // Getters and Setters
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public String getCookingTime() {
-        return cookingTime;
-    }
+    public String getNama() { return nama; }
+    public void setNama(String nama) { this.nama = nama; }
 
-    public String getCategory() {
-        return category;
-    }
+    public String getJenis() { return jenis; }
+    public void setJenis(String jenis) { this.jenis = jenis; }
 
-    public List<String> getIngredients() {
-        return ingredients;
-    }
+    public String getDeskripsi() { return deskripsi; }
+    public void setDeskripsi(String deskripsi) { this.deskripsi = deskripsi; }
 
-    public List<String> getSteps() {
-        return steps;
-    }
+    public String getWaktu() { return waktu; }
+    public void setWaktu(String waktu) { this.waktu = waktu; }
 
-    public String getAuthor() {
-        return author;
-    }
+    public int getKesulitan() { return kesulitan; }
+    public void setKesulitan(int kesulitan) { this.kesulitan = kesulitan; }
 
-    public String getDateAdded() {
-        return dateAdded;
-    }
+    public String getBahan() { return bahan; }
+    public void setBahan(String bahan) { this.bahan = bahan; }
 
-    // Setters
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    public String getCara() { return cara; }
+    public void setCara(String cara) { this.cara = cara; }
 
-    public void setImageResource(int imageResource) {
-        this.imageResource = imageResource;
-    }
+    public String getUserId() { return userId; }
+    public void setUserId(String userId) { this.userId = userId; }
 
-    public void setCookingTime(String cookingTime) {
-        this.cookingTime = cookingTime;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public void setSteps(List<String> steps) {
-        this.steps = steps;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public void setDateAdded(String dateAdded) {
-        this.dateAdded = dateAdded;
-    }
+    public long getTimestamp() { return timestamp; }
+    public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
 }

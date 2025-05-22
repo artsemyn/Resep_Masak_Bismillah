@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeFragment"
+    android:id="@+id/sv_home">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,27 +54,21 @@
                 android:background="@drawable/rounded_edittext"
                 android:padding="10dp"
                 android:drawableStart="@drawable/ic_search" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddRecipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="10dp"
+                android:icon="@drawable/ic_add"
+                android:text="Add Recipe"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                app:cornerRadius="8dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="#000000"
+                android:textColor="#000000" />
         </LinearLayout>
-
-        <!-- Popular Recipes -->
-        <TextView
-            android:id="@+id/tv_title_populer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Popular Recipes"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="8dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ry_populer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            android:orientation="horizontal"
-            android:nestedScrollingEnabled="false" />
 
         <!-- Category -->
         <TextView
@@ -84,6 +80,7 @@
             android:textAlignment="center"
             android:textSize="16sp"
             android:letterSpacing="0.1"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="12dp" />
 
         <HorizontalScrollView

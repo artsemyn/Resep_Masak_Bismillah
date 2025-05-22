@@ -1,5 +1,6 @@
 package com.example.resepmasakbismillah;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +26,10 @@ public class SavedFragment extends Fragment {
                 LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new RecipeAdapter(
                 getSavedRecipes(),
-                recipe -> {
-                    // Handle recipe click
+                (recipe, context) -> {
+                    Intent intent = new Intent(context, ResepActivity.class);
+                    intent.putExtra(ResepActivity.RECIPE_ID_KEY, recipe.getId());
+                    context.startActivity(intent);
                 }
         ));
 
