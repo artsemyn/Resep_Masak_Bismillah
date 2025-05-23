@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Warna utama aplikasi -->
+    <color name="primaryColor">#FF7503</color>
+
+    <!-- Warna sekunder aplikasi -->
+    <color name="secondaryColor">#FFEB3B</color>
+    <color name="greyLight">#DDDDDD</color>
 </resources>

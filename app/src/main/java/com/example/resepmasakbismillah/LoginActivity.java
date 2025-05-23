@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final String PREF_NAME = "user_prefs";
     private static final String KEY_IS_LOGGED_IN = "is_logged_in";
-    
+
     private EditText etEmail, etPassword;
     private Button btnSignIn, btnRegister;
     private FirebaseAuth mAuth;
