@@ -9,7 +9,6 @@ public class Recipe {
     private String jenis; // Changed from category
     private String deskripsi; // Changed from description
     private String waktu; // Changed from cookingTime
-    private int kesulitan; // Changed from difficulty
     private String bahan; // Changed from ingredients
     private String cara; // Changed from instructions
     private String userId;
@@ -20,13 +19,12 @@ public class Recipe {
     }
 
     public Recipe(String nama, String jenis, String deskripsi,
-                  String waktu, int kesulitan, String bahan,
+                  String waktu, String bahan,
                   String cara, String userId, long timestamp) {
         this.nama = nama;
         this.jenis = jenis;
         this.deskripsi = deskripsi;
         this.waktu = waktu;
-        this.kesulitan = kesulitan;
         this.bahan = bahan;
         this.cara = cara;
         this.userId = userId;
@@ -48,9 +46,6 @@ public class Recipe {
 
     public String getWaktu() { return waktu; }
     public void setWaktu(String waktu) { this.waktu = waktu; }
-
-    public int getKesulitan() { return kesulitan; }
-    public void setKesulitan(int kesulitan) { this.kesulitan = kesulitan; }
 
     public String getBahan() { return bahan; }
     public void setBahan(String bahan) { this.bahan = bahan; }

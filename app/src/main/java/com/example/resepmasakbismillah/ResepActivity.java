@@ -106,7 +106,7 @@ public class ResepActivity extends AppCompatActivity {
         tvIngredients.setText(recipe.getBahan());
         
         // Format and display steps as a string
-        String[] steps = recipe.getCara();
+        String steps = recipe.getCara();
         String stepsString = String.join("\n", steps);
         tvInstructions.setText(stepsString);
     }
@@ -133,17 +133,16 @@ public class ResepActivity extends AppCompatActivity {
         // Recook button click
         btnRecook.setOnClickListener(v -> {
             // Create a copy of the recipe with new timestamp
-            // Split instructions into array of strings
-            String[] instructionsArray = tvInstructions.getText().toString().split("\\n");
+            // Get the instructions text
+            String instructions = tvInstructions.getText().toString();
             
             Recipe newRecipe = new Recipe(
                 tvTitle.getText().toString(),  // nama
                 "",  // jenis
                 "",  // deskripsi
                 tvTime.getText().toString(),  // waktu
-                0,  // kesulitan
                 tvIngredients.getText().toString(),  // bahan
-                instructionsArray,  // cara (as String[])
+                instructions,  // cara (as String)
                 FirebaseAuth.getInstance().getCurrentUser().getUid(),  // userId
                 System.currentTimeMillis()  // timestamp
             );
