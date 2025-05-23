@@ -1,5 +1,6 @@
 package com.example.resepmasakbismillah;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword, etUsername;
-    private Button btnSignUp;
+    private Button btnSignUp, btnSignIn;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
@@ -31,11 +32,16 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         etUsername = findViewById(R.id.etUsername);
         btnSignUp = findViewById(R.id.btnSignUp);
+        btnSignIn = findViewById(R.id.btnSignIn);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         btnSignUp.setOnClickListener(this::registerUser);
+        btnSignIn.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void registerUser(View view) {

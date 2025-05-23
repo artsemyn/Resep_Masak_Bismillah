@@ -1,5 +1,6 @@
 package com.example.resepmasakbismillah;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class AkunFragment extends Fragment {
     private FragmentAkunBinding binding;
     private AkunViewModel viewModel;
     private FirebaseAuth mAuth;
+    private MainActivity mainActivity;
 
     public AkunFragment() {
         // Required empty public constructor
@@ -32,6 +34,14 @@ public class AkunFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAkunBinding.inflate(inflater, container, false);
@@ -42,8 +52,15 @@ public class AkunFragment extends Fragment {
         
         // Setup click listeners
         binding.btnLogout.setOnClickListener(v -> {
-            viewModel.onLogout();
-            // Handle logout UI changes
+            // Clear Firebase authentication
+            mAuth.signOut();
+            
+            // Clear login state
+            if (mainActivity != null) {
+                mainActivity.clearLoginState();
+            }
+            
+            // Navigate to LoginActivity
             Intent intent = new Intent(getActivity(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);

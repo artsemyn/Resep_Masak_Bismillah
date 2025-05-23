@@ -83,7 +83,7 @@
 
             <!-- Tombol Sign In -->
             <Button
-                android:id="@+id/tvRegister"
+                android:id="@+id/btnSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign In"

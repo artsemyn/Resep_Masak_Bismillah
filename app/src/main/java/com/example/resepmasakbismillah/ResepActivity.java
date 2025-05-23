@@ -101,17 +101,14 @@ public class ResepActivity extends AppCompatActivity {
     }
 
     private void setupViews(Recipe recipe) {
-        // Set title
         tvTitle.setText(recipe.getNama());
-        
-        // Set cooking time and category in the same TextView
-        tvTime.setText(String.format("%s menit    %s", recipe.getWaktu(), recipe.getJenis()));
-        
-        // Set ingredients
+        tvTime.setText(recipe.getWaktu());
         tvIngredients.setText(recipe.getBahan());
         
-        // Set instructions
-        tvInstructions.setText(recipe.getCara());
+        // Format and display steps as a string
+        String[] steps = recipe.getCara();
+        String stepsString = String.join("\n", steps);
+        tvInstructions.setText(stepsString);
     }
 
     private void setupButtons(Recipe recipe) {
@@ -121,8 +118,7 @@ public class ResepActivity extends AppCompatActivity {
             db.collection("recipes").document(recipe.getId())
                 .update(
                     "nama", tvTitle.getText().toString(),
-                    "waktu", tvTime.getText().toString().split(" ")[0],
-                    "jenis", tvTime.getText().toString().split(" ")[2],
+                    "waktu", tvTime.getText().toString(),
                     "bahan", tvIngredients.getText().toString(),
                     "cara", tvInstructions.getText().toString()
                 )
@@ -137,16 +133,19 @@ public class ResepActivity extends AppCompatActivity {
         // Recook button click
         btnRecook.setOnClickListener(v -> {
             // Create a copy of the recipe with new timestamp
+            // Split instructions into array of strings
+            String[] instructionsArray = tvInstructions.getText().toString().split("\\n");
+            
             Recipe newRecipe = new Recipe(
-                tvTitle.getText().toString(),
-                tvTime.getText().toString().split(" ")[2],
-                "",
-                tvTime.getText().toString().split(" ")[0],
-                0,
-                tvIngredients.getText().toString(),
-                tvInstructions.getText().toString(),
-                FirebaseAuth.getInstance().getCurrentUser().getUid(),
-                System.currentTimeMillis()
+                tvTitle.getText().toString(),  // nama
+                "",  // jenis
+                "",  // deskripsi
+                tvTime.getText().toString(),  // waktu
+                0,  // kesulitan
+                tvIngredients.getText().toString(),  // bahan
+                instructionsArray,  // cara (as String[])
+                FirebaseAuth.getInstance().getCurrentUser().getUid(),  // userId
+                System.currentTimeMillis()  // timestamp
             );
 
             // Add new recipe to Firestore

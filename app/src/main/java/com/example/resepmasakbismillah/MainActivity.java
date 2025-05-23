@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void clearLoginState() {
+    public void clearLoginState() {
         SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean(KEY_IS_LOGGED_IN, false);

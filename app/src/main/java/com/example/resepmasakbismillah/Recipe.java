@@ -11,7 +11,7 @@ public class Recipe {
     private String waktu; // Changed from cookingTime
     private int kesulitan; // Changed from difficulty
     private String bahan; // Changed from ingredients
-    private String cara; // Changed from instructions
+    private String[] cara; // Changed from instructions
     private String userId;
     private long timestamp;
 
@@ -21,7 +21,7 @@ public class Recipe {
 
     public Recipe(String nama, String jenis, String deskripsi,
                   String waktu, int kesulitan, String bahan,
-                  String cara, String userId, long timestamp) {
+                  String[] cara, String userId, long timestamp) {
         this.nama = nama;
         this.jenis = jenis;
         this.deskripsi = deskripsi;
@@ -55,8 +55,8 @@ public class Recipe {
     public String getBahan() { return bahan; }
     public void setBahan(String bahan) { this.bahan = bahan; }
 
-    public String getCara() { return cara; }
-    public void setCara(String cara) { this.cara = cara; }
+    public String[] getCara() { return cara; }
+    public void setCara(String[] cara) { this.cara = cara; }
 
     public String getUserId() { return userId; }
     public void setUserId(String userId) { this.userId = userId; }
