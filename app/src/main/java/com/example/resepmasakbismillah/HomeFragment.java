@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +18,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.resepmasakbismillah.databinding.FragmentHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,11 +29,11 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
-    private FragmentHomeBinding binding;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private Map<String, RecipeAdapter> categoryAdapters;
     private Map<String, List<Recipe>> categoryRecipes;
+    private View view;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,11 +47,11 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+        this.view = inflater.inflate(R.layout.fragment_home, container, false);
 
         // Set up add recipe button
-        binding.btnAddRecipe.setOnClickListener(v -> {
+        Button btnAddRecipe = this.view.findViewById(R.id.btnAddRecipe);
+        btnAddRecipe.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), TambahResepActivity.class);
             startActivity(intent);
         });
@@ -60,16 +60,16 @@ public class HomeFragment extends Fragment {
         loadRecipes();
         setupCategoryButtons();
         updateUserName();
-        return view;
+        return this.view;
     }
 
     private void setupRecyclerViews() {
         // Setup RecyclerViews for each category
-        setupCategoryRecyclerView("appetizers", binding.ryAppetizers);
-        setupCategoryRecyclerView("maincourse", binding.ryMaincourse);
-        setupCategoryRecyclerView("soup", binding.rySoup);
-        setupCategoryRecyclerView("desserts", binding.ryDesserts);
-        setupCategoryRecyclerView("drinks", binding.ryDrinks);
+        setupCategoryRecyclerView("appetizers", view.findViewById(R.id.ry_appetizers));
+        setupCategoryRecyclerView("maincourse", view.findViewById(R.id.ry_maincourse));
+        setupCategoryRecyclerView("soup", view.findViewById(R.id.ry_soup));
+        setupCategoryRecyclerView("desserts", view.findViewById(R.id.ry_desserts));
+        setupCategoryRecyclerView("drinks", view.findViewById(R.id.ry_drinks));
     }
 
     private void setupCategoryRecyclerView(String category, RecyclerView recyclerView) {
@@ -137,31 +137,38 @@ public class HomeFragment extends Fragment {
                     displayName = "User";
                 }
             }
-            binding.userName.setText(displayName);
+            TextView userName = view.findViewById(R.id.userName);
+            userName.setText(displayName);
         } else {
-            binding.userName.setText("Guest");
+            TextView userName = view.findViewById(R.id.userName);
+            userName.setText("Guest");
         }
     }
 
     private void setupCategoryButtons() {
-        binding.btnAppetizers.setOnClickListener(v -> {
-            scrollSmoothToView(binding.tvTitleAppetizers);
+        Button btnAppetizers = view.findViewById(R.id.btn_appetizers);
+        btnAppetizers.setOnClickListener(v -> {
+            scrollSmoothToView(view.findViewById(R.id.tv_title_appetizers));
         });
 
-        binding.btnMaincourse.setOnClickListener(v -> {
-            scrollSmoothToView(binding.tvTitleMaincourse);
+        Button btnMaincourse = view.findViewById(R.id.btn_maincourse);
+        btnMaincourse.setOnClickListener(v -> {
+            scrollSmoothToView(view.findViewById(R.id.tv_title_maincourse));
         });
 
-        binding.btnSoup.setOnClickListener(v -> {
-            scrollSmoothToView(binding.tvTitleSoup);
+        Button btnSoup = view.findViewById(R.id.btn_soup);
+        btnSoup.setOnClickListener(v -> {
+            scrollSmoothToView(view.findViewById(R.id.tv_title_soup));
         });
 
-        binding.btnDesserts.setOnClickListener(v -> {
-            scrollSmoothToView(binding.tvTitleDesserts);
+        Button btnDesserts = view.findViewById(R.id.btn_desserts);
+        btnDesserts.setOnClickListener(v -> {
+            scrollSmoothToView(view.findViewById(R.id.tv_title_desserts));
         });
 
-        binding.btnDrinks.setOnClickListener(v -> {
-            scrollSmoothToView(binding.tvTitleDrinks);
+        Button btnDrinks = view.findViewById(R.id.btn_drinks);
+        btnDrinks.setOnClickListener(v -> {
+            scrollSmoothToView(view.findViewById(R.id.tv_title_drinks));
         });
     }
 
@@ -170,7 +177,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onGlobalLayout() {
                 targetView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                binding.svHome.smoothScrollTo(0, targetView.getTop());
+                ScrollView svHome = view.findViewById(R.id.sv_home);
+                svHome.smoothScrollTo(0, targetView.getTop());
             }
         });
     }
@@ -178,6 +186,5 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
     }
 }
