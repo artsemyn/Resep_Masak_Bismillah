@@ -33,6 +33,10 @@
                 android:scaleType="centerCrop"
                 android:background="#EEEEEE" />
 
+
+
+            pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppprf
+
             <!-- Tombol Gambar -->
             <Button
                 android:id="@+id/btnUploadImage"
